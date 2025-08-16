@@ -17,7 +17,9 @@ dataset = load_dataset("trl-lib/tldr", split="train")
 
 # Dummy reward function: count the number of unique characters in the completions
 def reward_num_unique_chars(completions, **kwargs):
-    return [len(set(c)) for c in completions]
+  out = [len(set(c)) for c in completions]
+  print(out)
+  return out
 
 parser = TrlParser((ScriptArguments, GRPOConfig, ModelConfig))
 script_args, training_args, model_args = parser.parse_args_and_config()
