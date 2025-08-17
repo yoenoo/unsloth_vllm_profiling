@@ -31,16 +31,16 @@ torch_dtype = (
   model_args.torch_dtype if model_args.torch_dtype in ["auto", None] else getattr(torch, model_args.torch_dtype)
 )
 quantization_config = get_quantization_config(model_args)
-# quantization_config = Mxfp4Config(dequantize=True) # gpt-oss
+
+attn_impl = getattr(model_args, "attn_implementation", None) or "sdpa"
 
 training_args.model_init_kwargs = dict(
   revision=model_args.model_revision,
-  attn_implementation=model_args.attn_implementation,
-  # attn_implementation="eager", # gpt-oss
+  attn_implementation=attn_impl,
   torch_dtype=torch_dtype,
   device_map=get_kbit_device_map() if quantization_config is not None else None,
   quantization_config=quantization_config,
-  # use_cache=False, # gpt-oss
+  use_cache=False,
 )
 
 

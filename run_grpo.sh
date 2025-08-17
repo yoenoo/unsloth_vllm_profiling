@@ -13,6 +13,7 @@ uv pip install --pre vllm==0.10.1+gptoss \
   --extra-index-url https://download.pytorch.org/whl/nightly/cu128 \
   --index-strategy unsafe-best-match
 
+
 uv pip install vllm
 
 # UPDATE: without vLLM works (just very slow)
