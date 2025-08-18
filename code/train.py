@@ -23,11 +23,12 @@ training_args = GRPOConfig(
   gradient_accumulation_steps=8,
 
   use_vllm=True,
+  # vllm_mode="colocate", # this leads to OOM in my setting (8 x H200)
   vllm_mode="server",
   vllm_server_base_url="http://127.0.0.1:8000",
   vllm_gpu_memory_utilization=0.8,
   
-  # generation_batch_size = 16, ## TODO: test this
+  generation_batch_size = 64, ## TODO: test this
   num_generations=8,
   max_prompt_length=1024 + 512,
   max_completion_length=8192,

@@ -3,8 +3,23 @@ set -xe
 
 
 CUDA_DEVICE_ORDER=PCI_BUS_ID 
-CUDA_VISIBLE_DEVICES=0,1,2,3 trl vllm-serve \
-  --model Qwen/Qwen3-30B-A3B-Instruct-2507 \
+# CUDA_VISIBLE_DEVICES=6,7 trl vllm-serve \
+# CUDA_VISIBLE_DEVICES=0,1,2,3,4,5 trl vllm-serve \
+# CUDA_VISIBLE_DEVICES=0,1,2,3 trl vllm-serve \
+#   --model Qwen/Qwen3-30B-A3B-Instruct-2507 \
+#   --port 8000 \
+#   --tensor-parallel-size 2 \
+#   --data-parallel-size 2 \
+#   --gpu-memory-utilization 0.95 \
+#   --max-model-len 11674 \
+#   --max-num-seqs 256 \
+#   --max-num-batched-tokens 131072 \
+#   --enable-prefix-caching true \
+#   --log-level info
+
+# --model Qwen/Qwen3-30B-A3B-Instruct-2507 \ # (util 0.95)
+CUDA_VISIBLE_DEVICES=4,5,6,7 trl vllm-serve \
+  --model Qwen/Qwen3-14B \
   --port 8000 \
   --tensor-parallel-size 2 \
   --data-parallel-size 2 \
@@ -22,7 +37,3 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 trl vllm-serve \
 #   --gpu-memory-utilization 0.95 \
 #   --max-model-len 11674
 #   # --max-model-len 20480
-
-
-
-  # --max-model-len 4096 ## this works with promptlength 1024 + 512, completionlength 2048

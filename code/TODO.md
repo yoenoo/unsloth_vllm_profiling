@@ -1,0 +1,1 @@
+Make the training script modular and take inputs (using modelconfig etc)
